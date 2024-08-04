@@ -13,4 +13,5 @@ class Equipment(models.Model):
   text = models.TextField(null=False)
   image = models.ImageField(upload_to='images/', blank=False, null=False)
   created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
   user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
