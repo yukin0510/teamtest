@@ -10,6 +10,6 @@ class Equipment(models.Model):
   place = models.CharField()
   condition  = models.CharField()
   stock = models.PositiveIntegerField()
-  detail = models.TextField()
+  text = models.TextField()
   created_at = models.DateTimeField(default=timezone.now)
   updated_at = models.DateTimeField(default=timezone.now)

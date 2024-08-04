@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="nav-left">
+                <ul>
+                    <li><a href="{% url 'equipment:list' %}">備品一覧</a></li>
+                    <li>発注履歴</li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="{% url 'users:users' %}">ユーザー一覧</a></li>
+                    <li><a href="{% url 'logout' %}">ログアウト</a></li>
+                </ul>
+            </div>
+          </div>
+    </header>
+
+    {% block content %}{% endblock content %}
+
+  </body>
+  </html>

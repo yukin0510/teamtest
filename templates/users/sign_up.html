@@ -1,36 +1,77 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>teamtest</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header>
-        <div class="nav-bar">
-            <div class="nav-left">
-                <ul>
-                    <li><a href="{% url 'equipment:list' %}">備品一覧</a></li>
-                    <li>発注履歴</li>
-                </ul>
-            </div>
-            <div class="nav-right">
-                <ul>
-                    <li>ユーザー一覧</li>
-                    <li>ログアウト</li>
-                </ul>
-            </div>
-          </div>
-    </header>
+
+{% block title %}新規登録{% endblock title %}
+
+{% block content %}
 
     <div class="content">
       <div class="content-title">
         <h2>新規登録</h2>
       </div>
       <div class="content-main">
-        {{form.as_p}}
+
+        <form method="post">
+          {% csrf_token %}
+        {% if form.errors %}
+        <div class="error">
+            <p>入力にエラーがあります。もう一度ご確認ください。</p>
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        <div class="field">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {% if form.username.errors %}
+            <ul class="errorlist">
+                {% for error in form.username.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="field">
+            {{ form.email.label_tag  }}
+            {{ form.email }}
+            {% if form.email.errors %}
+            <ul class="errorlist">
+                {% for error in form.email.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="field">
+            {{ form.password1.label_tag  }}<a>(英数字含む8文字以上)</a>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+            <ul class="errorlist">
+                {% for error in form.password1.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="field">
+            {{ form.password2.label_tag  }}
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+            <ul class="errorlist">
+                {% for error in form.password2.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="button">
+            <input type="submit" value="Sign Up">
+        </div>
       </div>
+    </form>
     </div>
-</body>
-</html>
+
+{% endblock content %}

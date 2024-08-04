@@ -1,28 +1,10 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>teamtest</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header>
-        <div class="nav-bar">
-            <div class="nav-left">
-                <ul>
-                    <li><a href="{% url 'equipment:list' %}">備品一覧</a></li>
-                    <li>発注履歴</li>
-                </ul>
-            </div>
-            <div class="nav-right">
-                <ul>
-                    <li>ユーザー一覧</li>
-                    <li>ログアウト</li>
-                </ul>
-            </div>
-          </div>
-    </header>
+
+{% block title %}新規登録{% endblock title %}
+
+{% block content %}
+
 
     <div class="content">
       <div class="content-title">
@@ -30,6 +12,9 @@
       </div><!--content-titleのとじ-->
 
       <div class="content-main">
+
+        <form method="post">
+          {% csrf_token %}
         <div class="login-form">
           <div class="login-name">
           {{ form.username.label_tag }}
@@ -56,12 +41,13 @@
         <div class="button">
           <input type="submit" value="Log in">
         </div><!--buttonのとじ-->
+      </form>
 
       </div><!--login-formのとじ-->
       <p>アカウントをお持ちでないですか？登録は<a href="{% url 'users:register' %}">こちら.</a></p>
+      
       </div><!--content-mainのとじ-->
 
     </div><!--contentのとじ-->
 
-</body>
-</html>
+{% endblock content %}
