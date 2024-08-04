@@ -156,4 +156,4 @@ LOGOUT_REDIRECT_URL = '/'
 
 SECRET_KEY = env('SECRET_KEY')
 
-LOGIN_URL = '/'
+LOGIN_URL = '/login/'
