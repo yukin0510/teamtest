@@ -11,6 +11,9 @@ class EquipListView(LoginRequiredMixin, ListView):
     model = Equipment
     context_object_name = 'equipment'
 
+    def get_queryset(self):
+        return Equipment.objects.order_by('-created_at')
+
 class EquipCreateView(LoginRequiredMixin, CreateView):
     template_name = 'equipment/add.html'
     model = Equipment

@@ -21,6 +21,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     is_staff = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    registration_date = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

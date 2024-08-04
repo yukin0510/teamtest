@@ -27,3 +27,6 @@ class CustomUserListView(LoginRequiredMixin,ListView):
     template_name = 'users/users.html'
     model = CustomUser
     context_object_name = 'users'
+
+    def get_queryset(self):
+        return CustomUser.objects.order_by('-registration_date')
