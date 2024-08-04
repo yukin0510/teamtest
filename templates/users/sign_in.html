@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>teamtest</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="nav-left">
+                <ul>
+                    <li><a href="{% url 'equipment:list' %}">備品一覧</a></li>
+                    <li>発注履歴</li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li>ユーザー一覧</li>
+                    <li>ログアウト</li>
+                </ul>
+            </div>
+          </div>
+    </header>
+
+    <div class="content">
+      <div class="content-title">
+        <h2>ログイン</h2>
+      </div><!--content-titleのとじ-->
+
+      <div class="content-main">
+        <div class="login-form">
+          <div class="login-name">
+          {{ form.username.label_tag }}
+          {{ form.username }}
+          {% if form.username.errors %}
+          <ul class="errorlist">
+          {% for error in form.username.errors %}
+               <li>{{ error }}</li>
+          {% endfor %}
+          </ul>
+          {% endif %}
+          </div><!--login-nameのとじ-->
+          <div class="login-pass">
+        {{ form.password.label_tag  }}<a>(英数字含む8文字以上)</a>
+        {{ form.password }}
+        {% if form.password.errors %}
+        <ul class="errorlist">
+            {% for error in form.password.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        </div><!--login-passのとじ-->
+        <div class="button">
+          <input type="submit" value="Log in">
+        </div><!--buttonのとじ-->
+
+      </div><!--login-formのとじ-->
+      <p>アカウントをお持ちでないですか？登録は<a href="{% url 'users:register' %}">こちら.</a></p>
+      </div><!--content-mainのとじ-->
+
+    </div><!--contentのとじ-->
+
+</body>
+</html>

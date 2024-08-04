@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>teamtest</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="nav-left">
+                <ul>
+                    <li><a href="{% url 'equipment:list' %}">備品一覧</a></li>
+                    <li>発注履歴</li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li>ユーザー一覧</li>
+                    <li>ログアウト</li>
+                </ul>
+            </div>
+          </div>
+    </header>
+
+    <div class="content">
+      <div class="content-title">
+        <h2>備品一覧</h2>
+      </div>
+      <div class="content-main">
+
+        <table width="50%" cellspacing="10" cellpadding="10">
+          <tr align="center">
+          <th bgcolor="#d3d3d3">名前</th>
+          <th bgcolor="#d3d3d3">カテゴリー</th>
+          <th bgcolor="#d3d3d3">設置場所</th>
+          <th bgcolor="#d3d3d3">在庫数</th>
+          </tr>
+          {% for equip in equipment %}
+          <tr align="center">
+          <td>{{ equip.equip_name }} </td>
+          <td>{{ equip.category }} </td>
+          <td>{{ equip.place }} </td>
+          <td>{{ equip.stock }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+
+      </div>
+
+
+</body>
+
+</html>

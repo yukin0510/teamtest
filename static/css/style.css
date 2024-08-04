@@ -1,0 +1,105 @@
+/* リセットスタイル */
+body,
+h1,
+ul,
+li,
+a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* 全体レイアウト */
+body {
+  background-color: #f5f5f5;
+  color:#373737;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  justify-content: center; /* 横方向に中央揃え */
+  align-items: center; /* 縦方向に中央揃え */
+}
+
+/* ナビゲーションバー */
+header {
+  background-color: #2e3b4e;
+  height: 55px;
+  width: 100vw;
+}
+
+.nav-bar {
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* 横方向に並べる */
+  align-items: center; /* 縦方向に中央揃え */
+}
+
+.nav-bar ul {
+  display: flex; /* ul内のliを横並びにする */
+  margin: auto 15px;
+}
+
+.nav-bar li {
+  margin-right: 15px; /* 各liの右側にマージンを追加 */
+}
+
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center; /* 縦方向に中央揃え */
+}
+
+.nav-bar a {
+  color: white;
+}
+
+/* コンテンツ */
+.content {
+  width: 70%;
+  /*height: 150px;*/
+  background-color: #FFFFFF;
+  text-align: center;
+  margin: 30px;
+  border-radius:20px;
+  box-shadow: 1px 5px 5px 0 rgba(189, 189, 189, 0.5);
+}
+
+.content-title {
+  margin: 20px;
+}
+
+.content-main ul {
+  display: flex; /* ul内のliを横並びにする */
+  justify-content: space-around; /* 横方向に並べる */
+  align-items: center; /* 縦方向に中央揃え */
+  margin: 20px;
+}
+
+.content-main {
+  margin: 30px;
+}
+
+.title {
+  font-weight: 100;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+tr {
+  border-bottom: 1px solid gray;
+}
+
+.login-form {
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  justify-content: center; /* 横方向に中央揃え */
+  align-items: center; /* 縦方向に中央揃え */
+}

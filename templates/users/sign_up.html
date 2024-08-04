@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>teamtest</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="nav-left">
+                <ul>
+                    <li><a href="{% url 'equipment:list' %}">備品一覧</a></li>
+                    <li>発注履歴</li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li>ユーザー一覧</li>
+                    <li>ログアウト</li>
+                </ul>
+            </div>
+          </div>
+    </header>
+
+    <div class="content">
+      <div class="content-title">
+        <h2>新規登録</h2>
+      </div>
+      <div class="content-main">
+        {{form.as_p}}
+      </div>
+    </div>
+</body>
+</html>
