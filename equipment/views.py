@@ -29,10 +29,9 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
     template_name = 'equipment/detail.html'
     context_object_name = 'equip' #ここの名前でテンプレート上で呼び出す
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):#画像がエラーになった時用の回避策
         context = super().get_context_data(**kwargs)
         equip = context['equip']
-
         # 画像URLが空の場合、デフォルト画像URLを設定
         context['image_url'] = equip.image.url if equip.image else '/static/images/no_image.jpg'
         return context
