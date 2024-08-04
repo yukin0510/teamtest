@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}備品詳細{% endblock title %}
+
+{% block content %}
+
+
+    <div class="content">
+      <div class="content-title">
+        <h2>備品詳細</h2>
+      </div>
+      <div class="content-main">
+
+        <p> <img src="{{ equip.image.url }}" alt="{{ equip.equip_name }}" class="image"></p>
+        <p>{{ equip.text }}</p>
+        <p>カテゴリ: {{ equip.category }}</p>
+        <p>状態: {{ equip.condition }}</p>
+        <p>設置場所: {{ equip.place }}</p>
+        <p>在庫数: {{ equip.stock }}</p>
+
+      </div>
+
+      
+{% endblock content %}

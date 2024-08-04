@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'teamtest',
+        'NAME': 'cteam',
         'USER': 'postgres',
         'PASSWORD': 'l84pe2001', #ご自身の設定したパスワードを設定しましょう
         'HOST': 'localhost',
@@ -143,3 +143,7 @@ LOGOUT_REDIRECT_URL = '/'
 SECRET_KEY = env('SECRET_KEY')
 
 LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/equipment/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

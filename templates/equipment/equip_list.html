@@ -11,6 +11,9 @@
         <h2>備品一覧</h2>
       </div>
       <div class="content-main">
+        <div class="equip-add">
+        <a href="{% url 'equipment:add' %}">備品追加</a>
+        </div>
 
         <table width="50%" cellspacing="10" cellpadding="10">
           <tr align="center">
@@ -21,7 +24,7 @@
           </tr>
           {% for equip in equipment %}
           <tr align="center">
-          <td>{{ equip.equip_name }} </td>
+          <td><a href="{% url 'equipment:detail' equip.pk %}">{{ equip.equip_name }}</a> </td>
           <td>{{ equip.category }} </td>
           <td>{{ equip.place }} </td>
           <td>{{ equip.stock }}</td>

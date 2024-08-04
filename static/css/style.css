@@ -99,8 +99,29 @@ tr {
   border-bottom: 1px solid gray;
 }
 
+.equip-add {
+  text-align: right;
+}
+
+.image {
+    max-width: auto; /* 例えば300pxに制限する */
+    height: 300px;
+}
+
+
+/*フォーム系*/
 .login-form {
   flex-direction: column; /* 子要素を縦方向に並べる */
   justify-content: center; /* 横方向に中央揃え */
   align-items: center; /* 縦方向に中央揃え */
 }
+
+.login-name,
+.login-pass {
+  margin-bottom: 15px;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+

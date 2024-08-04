@@ -20,7 +20,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
 class SignUpView(generic.CreateView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('users:login')  # 登録完了後にリダイレクトするURL
+    success_url = reverse_lazy('equipment:list')  # 登録完了後にリダイレクトするURL
     template_name = 'users/sign_up.html'
 
 class CustomUserListView(LoginRequiredMixin,ListView):

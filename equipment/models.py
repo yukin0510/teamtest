@@ -1,15 +1,15 @@
 from django.db import models
-from django.utils import timezone 
+from django.conf import settings
 
 class Equipment(models.Model):
   class Meta:
     db_table = 'equip'
 
-  equip_name = models.CharField(max_length=50)
-  category = models.CharField(max_length=50)
-  place = models.CharField(max_length=50)
-  condition  = models.CharField(max_length=50)
-  stock = models.PositiveIntegerField()
-  text = models.TextField(max_length=50)
-  created_at = models.DateTimeField(default=timezone.now)
-  updated_at = models.DateTimeField(default=timezone.now)
+  equip_name = models.CharField(max_length=50,null=False)
+  category = models.CharField(max_length=50,null=False)
+  place = models.CharField(max_length=50,null=False)
+  condition  = models.CharField(max_length=50,null=False)
+  stock = models.PositiveIntegerField(null=False)
+  text = models.TextField(null=False)
+  image = models.ImageField(upload_to='images/', blank=False, null=False)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)

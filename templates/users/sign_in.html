@@ -28,7 +28,7 @@
           {% endif %}
           </div><!--login-nameのとじ-->
           <div class="login-pass">
-        {{ form.password.label_tag  }}<a>(英数字含む8文字以上)</a>
+        {{ form.password.label_tag  }}
         {{ form.password }}
         {% if form.password.errors %}
         <ul class="errorlist">
@@ -39,7 +39,7 @@
         {% endif %}
         </div><!--login-passのとじ-->
         <div class="button">
-          <input type="submit" value="Log in">
+          <input type="submit" value="ログイン">
         </div><!--buttonのとじ-->
       </form>
 
