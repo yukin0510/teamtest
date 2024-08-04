@@ -15,7 +15,7 @@
           {% csrf_token %}
         {% if form.errors %}
         <div class="error">
-            <p>入力にエラーがあります。もう一度ご確認ください。</p>
+            <p><font color=red>入力にエラーがあります。もう一度ご確認ください。</font></p>
             {{ form.non_field_errors }}
         </div>
         {% endif %}
@@ -25,7 +25,7 @@
             {% if form.username.errors %}
             <ul class="errorlist">
                 {% for error in form.username.errors %}
-                    <li>{{ error }}</li>
+                    <li><font color=red>{{ error }}</font></li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -37,7 +37,7 @@
             {% if form.email.errors %}
             <ul class="errorlist">
                 {% for error in form.email.errors %}
-                    <li>{{ error }}</li>
+                    <li><font color=red>{{ error }}</font></li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -49,7 +49,7 @@
             {% if form.password1.errors %}
             <ul class="errorlist">
                 {% for error in form.password1.errors %}
-                    <li>{{ error }}</li>
+                    <li><font color=red>{{ error }}</font></li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -61,11 +61,20 @@
             {% if form.password2.errors %}
             <ul class="errorlist">
                 {% for error in form.password2.errors %}
-                    <li>{{ error }}</li>
+                    <li><font color=red>{{ error }}</font></li>
                 {% endfor %}
             </ul>
             {% endif %}
         </div>
+        <div class="field">
+            {{ form.is_staff.label_tag  }}
+            {{ form.is_staff }}
+        </div>
+        <div class="field">
+            {{ form.is_admin.label_tag  }}
+            {{ form.is_admin }}
+        </div>
+
 
         <div class="button">
             <input type="submit" value="Sign Up">

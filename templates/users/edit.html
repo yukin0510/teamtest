@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}ユーザー情報の編集{% endblock title %}
+
+{% block content %}
+    <div class="content">
+      <div class="content-title">
+        <h2>ユーザー情報の編集</h2>
+      </div>
+      <div class="content-main">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% if form.errors %}
+            <div class="error">
+                <p><font color="red">入力にエラーがあります。もう一度ご確認ください。</font></p>
+                {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+          <div class="field">
+              {{ form.username.label_tag }}
+              {{ form.username }}
+              {% if form.username.errors %}
+                <ul class="errorlist">
+                  {% for error in form.username.errors %}
+                    <li><font color="red">{{ error }}</font></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+          </div>
+          <div class="field">
+              {{ form.email.label_tag }}
+              {{ form.email }}
+              {% if form.email.errors %}
+                <ul class="errorlist">
+                  {% for error in form.email.errors %}
+                    <li><font color="red">{{ error }}</font></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+          </div>
+          <div class="field">
+              {{ form.is_staff.label_tag }}
+              {{ form.is_staff }}
+          </div>
+          <div class="field">
+              {{ form.is_admin.label_tag }}
+              {{ form.is_admin }}
+          </div>
+          <div class="button">
+              <input type="submit" value="保存">
+          </div>
+        </form>
+      </div>
+    </div>
+{% endblock content %}
