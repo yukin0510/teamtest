@@ -3,13 +3,14 @@ from django.views import generic
 from .forms import CustomUserCreationForm,CustomUserChangeForm
 from django.views.generic import ListView,TemplateView,UpdateView
 from .models import CustomUser
-from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 class IndexView(TemplateView):
     template_name = 'users/index.html'
 
-class UserUpdateView(UpdateView):
-    model = get_user_model()
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = CustomUser
     form_class = CustomUserChangeForm
     template_name = 'users/edit.html'
     success_url = reverse_lazy('users:users')
@@ -22,7 +23,7 @@ class SignUpView(generic.CreateView):
     success_url = reverse_lazy('users:login')  # 登録完了後にリダイレクトするURL
     template_name = 'users/sign_up.html'
 
-class CustomUserListView(ListView):
+class CustomUserListView(LoginRequiredMixin,ListView):
     template_name = 'users/users.html'
     model = CustomUser
     context_object_name = 'users'
