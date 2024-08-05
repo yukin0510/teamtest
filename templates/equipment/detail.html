@@ -1,23 +1,42 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}備品詳細{% endblock title %}
+{% block title %}{{ equip.equip_name }}の詳細{% endblock title %}
 
 {% block content %}
 
 
     <div class="content">
       <div class="content-title">
-        <h2>備品詳細</h2>
+        <h2>{{ equip.equip_name }}</h2>
       </div>
       <div class="content-main">
-        <a href="{% url 'equipment:edit' equip.id %}">編集</a>
-        <p> <img src="{{ image_url }}" alt="{{ equip.equip_name }}" class="image"></p>
-        <p> {{ equip.text }}</p>
-        <p>カテゴリ: {{ equip.category }}</p>
-        <p>状態: {{ equip.condition }}</p>
-        <p>設置場所: {{ equip.place }}</p>
-        <p>在庫数: {{ equip.stock }}</p>
+
+        <div class="detail">
+
+          <a href="{% url 'equipment:edit' equip.id %}">編集</a>
+          <p> <img src="{{ image_url }}" alt="{{ equip.equip_name }}" class="image"></p>
+          <p> {{ equip.text }}</p>
+          <p>カテゴリ: {{ equip.category }}</p>
+          <p>状態: {{ equip.condition }}</p>
+          <p>設置場所: {{ equip.place }}</p>
+          <p>在庫数: {{ equip.stock }}</p>
+
+        </div>
+
+        {% if user.is_admin %}<!-- 管理者の場合にだけ表示される！ -->
+        <div class="detail">
+          <h2>在庫数の変更</h2>
+            <!-- フォームの表示 -->
+            <form method="post">
+             {% csrf_token %}
+             {{ stock_update_form.as_p }}
+              <button type="submit">保存</button>
+            </form>
+        </div>
+        {% endif %}
+
+        
 
       </div>
 

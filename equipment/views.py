@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView,CreateView,DetailView,UpdateView
 from .models import Equipment
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import EquipForm
+from .forms import EquipForm, StockUpdateForm
 
 
 class EquipListView(LoginRequiredMixin, ListView):
@@ -34,10 +34,24 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
         equip = context['equip']
         # 画像URLが空の場合、デフォルト画像URLを設定
         context['image_url'] = equip.image.url if equip.image else '/static/images/no_image.jpg'
+        context['stock_update_form'] = StockUpdateForm(instance=equip) #在庫数更新
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = StockUpdateForm(request.POST, instance=self.object)
+        if form.is_valid():
+            form.save()
+            return redirect(self.get_success_url())
+        return self.render_to_response(self.get_context_data(stock_update_form=form))
+
+    def get_success_url(self):
+        return reverse_lazy('equipment:detail', kwargs={'pk': self.object.pk})
+    
 
 class EquipUpdateView(UpdateView):
     model = Equipment
     form_class = EquipForm
     template_name = 'equipment/edit.html'
     success_url = reverse_lazy('equipment:list')
+
