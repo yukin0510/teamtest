@@ -22,8 +22,13 @@
 
             <div class="nav-right">
                 <ul>
+                    {% if user.is_authenticated %} <!--ログインしているときの表示-->
                     <li><a href="{% url 'users:users' %}">ユーザー一覧</a></li>
                     <li><a href="{% url 'logout' %}">ログアウト</a></li>
+                    {% else %}<!--ログインしてないときの表示-->
+                    <li><a href="{% url 'users:register' %}">新規登録</a></li>
+                    <li><a href="{% url 'users:login' %}">ログイン</a></li>
+                    {% endif %}
                 </ul>
             </div>
           </div>
