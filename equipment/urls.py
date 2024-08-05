@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import EquipListView,EquipCreateView,EquipDetailView
+from .views import EquipListView,EquipCreateView,EquipDetailView,EquipUpdateView
 
 app_name = 'equipment'
 urlpatterns = [
     path('', EquipListView.as_view(), name='list'),
     path('add/', EquipCreateView.as_view(), name='add'),
     path('<int:pk>', EquipDetailView.as_view(), name='detail'),
+    path('<int:pk>/edit/', EquipUpdateView.as_view(), name='edit'),
 ]

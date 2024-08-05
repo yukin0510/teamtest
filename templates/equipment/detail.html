@@ -11,7 +11,7 @@
         <h2>備品詳細</h2>
       </div>
       <div class="content-main">
-
+        <a href="{% url 'equipment:edit' equip.id %}">編集</a>
         <p> <img src="{{ image_url }}" alt="{{ equip.equip_name }}" class="image"></p>
         <p> {{ equip.text }}</p>
         <p>カテゴリ: {{ equip.category }}</p>

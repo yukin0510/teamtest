@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}備品編集{% endblock title %}
+
+{% block content %}
+
+
+    <div class="content">
+      <div class="content-title">
+        <h2>備品編集</h2>
+      </div>
+      <div class="content-main">
+
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+        {% if form.errors %}
+        <div class="error">
+            <p><font color=red>入力にエラーがあります。もう一度ご確認ください。</font></p>
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        <div class="field">
+        {{ form.as_p }}
+        </div>
+        <div class="button">
+          <input type="submit" value="登録">
+        </form>
+      </div>
+      </div>
+
+      
+{% endblock content %}
