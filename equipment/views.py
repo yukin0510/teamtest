@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView,CreateView,DetailView,UpdateView
-from .models import Equipment
+from django.views.generic import ListView,CreateView,DetailView,UpdateView,DeleteView
+from .models import Equipment,StockChange
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import EquipForm, StockUpdateForm
 
@@ -35,13 +35,25 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
         # 画像URLが空の場合、デフォルト画像URLを設定
         context['image_url'] = equip.image.url if equip.image else '/static/images/no_image.jpg'
         context['stock_update_form'] = StockUpdateForm(instance=equip) #在庫数更新
+        context['stock_changes'] = StockChange.objects.filter(equip=equip).order_by('-changed_date')[:5]
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = StockUpdateForm(request.POST, instance=self.object)
         if form.is_valid():
-            form.save()
+            # 在庫数の変更前の値を保存
+            previous_stock = self.object.stock
+            # フォームを保存（在庫数を更新）
+            updated_equip = form.save()
+
+            # StockChangeテーブルに変更履歴を保存
+            StockChange.objects.create(
+                equip=self.object,
+                user=request.user,
+                previous_stock=previous_stock,
+                new_stock=updated_equip.stock,
+            )
             return redirect(self.get_success_url())
         return self.render_to_response(self.get_context_data(stock_update_form=form))
 
@@ -53,5 +65,9 @@ class EquipUpdateView(UpdateView):
     model = Equipment
     form_class = EquipForm
     template_name = 'equipment/edit.html'
+    success_url = reverse_lazy('equipment:list')
+
+class EquipDeleteView(DeleteView):
+    model = Equipment
     success_url = reverse_lazy('equipment:list')
 

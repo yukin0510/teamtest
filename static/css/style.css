@@ -84,6 +84,8 @@ header {
 
 .content-main {
   margin: 30px;
+  display: flex;
+  flex-direction: column; /* 子要素を縦方向に並べる */
 }
 
 .title {
@@ -106,6 +108,26 @@ tr {
 .image {
     max-width: auto; /* 例えば300pxに制限する */
     height: 300px;
+}
+
+.detail {
+  margin-bottom: 20px;
+}
+
+.small-text {
+  font-size: 0.6em;
+}
+
+
+/* 編集と削除のボタン */
+.edit-delete {
+  display: flex;
+  gap: 20px; /* ボタン間の間隔を20pxに設定 */
+  justify-content: center; /* ボタンを中央揃え */
+}
+
+.edit-delete form {
+  margin: 0; /* 各formのマージンを削除 */
 }
 
 
