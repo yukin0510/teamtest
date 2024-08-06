@@ -27,7 +27,7 @@
           <td><a href="{% url 'equipment:detail' equip.pk %}">{{ equip.equip_name }}</a> </td>
           <td>{{ equip.category }} </td>
           <td>{{ equip.place }} </td>
-          <td>{{ equip.stock }}</td>
+          <td>在庫数：{{ equip.stock }}</td>
           </tr>
           {% endfor %}
         </table>

@@ -11,8 +11,12 @@
         <div class="nav-bar">
             <div class="nav-left">
                 <ul>
+                    {% if user.is_authenticated %} <!--ログインしているときの表示-->
                     <li><a href="{% url 'equipment:list' %}">備品一覧</a></li>
                     <li>発注履歴</li>
+                    {% else %}<!--ログインしてないときの表示-->
+                    <li><a href="{% url 'users:index' %}">ホーム</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
