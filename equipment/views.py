@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView,CreateView,DetailView,UpdateView
-from .models import Equipment
+from .models import Equipment,StockChange
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import EquipForm, StockUpdateForm
 
@@ -41,7 +41,18 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
         self.object = self.get_object()
         form = StockUpdateForm(request.POST, instance=self.object)
         if form.is_valid():
-            form.save()
+            # 在庫数の変更前の値を保存
+            previous_stock = self.object.stock
+            # フォームを保存（在庫数を更新）
+            updated_equip = form.save()
+
+            # StockChangeテーブルに変更履歴を保存
+            StockChange.objects.create(
+                equip=self.object,
+                user=request.user,
+                previous_stock=previous_stock,
+                new_stock=updated_equip.stock,
+            )
             return redirect(self.get_success_url())
         return self.render_to_response(self.get_context_data(stock_update_form=form))
 

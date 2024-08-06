@@ -16,3 +16,12 @@ class Equipment(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
   user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
 
+class StockChange(models.Model):
+    class Meta:
+      db_table = 'stockchange'
+
+    equip = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    changed_date = models.DateTimeField(auto_now_add=True)
+    previous_stock = models.PositiveIntegerField()
+    new_stock = models.PositiveIntegerField()
