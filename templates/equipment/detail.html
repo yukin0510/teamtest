@@ -13,8 +13,17 @@
       <div class="content-main">
 
         <div class="detail">
+        <div class="edit-delete">
+            <form action="{% url 'equipment:edit' equip.id %}" method="get">
+            {% csrf_token %}
+            <input type="submit" class="button" value="編集">
+            </form>
+          <form action="{% url 'equipment:delete' equip.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="button" value="削除">
+        </form>
+      </div>
 
-          <a href="{% url 'equipment:edit' equip.id %}">編集</a>
           <p> <img src="{{ image_url }}" alt="{{ equip.equip_name }}" class="image"></p>
           <p> {{ equip.text }}</p>
           <p>カテゴリ: {{ equip.category }}</p>
@@ -36,7 +45,34 @@
         </div>
         {% endif %}
 
-        
+        <div class="detail">
+          <h2>在庫数変更履歴 <span class="small-text">※最新5件を表示</span></h2>
+          <table>
+            <thead>
+              <tr>
+                <th>変更日時</th>
+                <th>変更前の在庫数</th>
+                <th>変更後の在庫数</th>
+                <th>変更したユーザー</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for change in stock_changes %}
+              <tr>
+                <td>{{ change.changed_date }}</td>
+                <td>{{ change.previous_stock }}</td>
+                <td>{{ change.new_stock }}</td>
+                <td>{{ change.user.username }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4">変更履歴はありません</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       </div>
 
