@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}発注履歴{% endblock title %}
+
+{% block content %}
+
+
+    <div class="content">
+      <div class="content-title">
+        <h2>発注履歴</h2>
+      </div>
+      <div class="content-main">
+
+        <table width="50%" cellspacing="10" cellpadding="10">
+          <tr align="center">
+          <th bgcolor="#d3d3d3">発注日</th>
+          <th bgcolor="#d3d3d3">備品名</th>
+          <th bgcolor="#d3d3d3">数量</th>
+          <th bgcolor="#d3d3d3">ステータス</th>
+          </tr>
+          {% for order in orders %}
+          <tr align="center">
+          <td>{{ order.order_date }}</a> </td>
+          <td>{{ order.equip.equip_name }} </td>
+          <td>{{ order.quantity }} </td>
+          <td>{{ order.approval_status }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+
+      </div>
+
+      
+{% endblock content %}

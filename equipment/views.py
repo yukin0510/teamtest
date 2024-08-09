@@ -42,9 +42,10 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
         self.object = self.get_object()
         form = StockUpdateForm(request.POST, instance=self.object)
         if form.is_valid():
-            # 在庫数の変更前の値を保存
+            # 在庫数の変更前の値を取得
             previous_stock = self.object.stock
-            # フォームを保存（在庫数を更新）
+
+            # フォームを保存して在庫数を更新
             updated_equip = form.save()
 
             # StockChangeテーブルに変更履歴を保存
@@ -54,6 +55,7 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
                 previous_stock=previous_stock,
                 new_stock=updated_equip.stock,
             )
+
             return redirect(self.get_success_url())
         return self.render_to_response(self.get_context_data(stock_update_form=form))
 

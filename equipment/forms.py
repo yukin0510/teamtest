@@ -26,3 +26,4 @@ class StockUpdateForm(forms.ModelForm):
         labels = {
          'stock': '在庫数',
       }
+        
