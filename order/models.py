@@ -18,3 +18,5 @@ class Order(models.Model):
       self.approval_status = '承認済み'
       self.approval_date = timezone.now()
       self.save()
+
+  
