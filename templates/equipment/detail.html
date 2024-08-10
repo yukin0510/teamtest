@@ -72,8 +72,65 @@
             </tbody>
           </table>
         </div>
+
+        <div class="detail">
+          <h2>発注依頼</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ order_form.as_p }}
+          <button type="submit">発注依頼</button>
+      </form>
+        </div>
+
+        {% if user.is_admin %}
+        <div class="detail">
+          <h2>発注依頼の承認</h2>
+        <table>
+          <tr align="center">
+              <th>発注日</th>
+              <th>発注者</th>
+              <th>発注数</th>
+              <th>承認ステータス</th>
+              <th></th>
+          </tr>
+          {% for order in orders %}
+          <tr align="center">
+              <td>{{ order.order_date }}</td>
+              <td>{{ order.user.username }}</td>
+              <td>{{ order.quantity }}</td>
+              <td>
+                {% if order.approval_status == "承認待ち" %}
+                <span style="color: red;"><b>{{ order.approval_status }}</b></span>
+                {% elif order.approval_status == "承認済み" %}
+                <span style="color: green;"><b>{{ order.approval_status }}</b></span>
+                {% else %}
+                {{ order.approval_status }}
+                {% endif %}
+              </td>
+              <td>
+                  {% if order.approval_status != '承認済み' %}
+                  <form method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="approve_order" value="{{ order.pk }}">
+                      <button type="submit">承認する</button>
+                  </form>
+                  {% else %}
+                  
+                  {% endif %}
+              </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4">発注依頼はありません</td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+          
+      </table>
       </div>
 
+
+        </div>
       </div>
 
       

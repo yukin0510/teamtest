@@ -21,13 +21,15 @@ body {
   flex-direction: column; /* 子要素を縦方向に並べる */
   justify-content: center; /* 横方向に中央揃え */
   align-items: center; /* 縦方向に中央揃え */
+  scrollbar-gutter: stable;
 }
 
 /* ナビゲーションバー */
 header {
   background-color: #2e3b4e;
   height: 55px;
-  width: 100vw;
+  width: 100%;
+
 }
 
 .nav-bar {
