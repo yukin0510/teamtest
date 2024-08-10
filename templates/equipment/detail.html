@@ -16,7 +16,7 @@
         <div class="edit-delete">
             <form action="{% url 'equipment:edit' equip.id %}" method="get">
             {% csrf_token %}
-            <input type="submit" class="button" value="編集">
+            <input type="submit" class="button" value="編集" class=>
             </form>
           <form action="{% url 'equipment:delete' equip.id %}" method="post">
             {% csrf_token %}
@@ -40,7 +40,7 @@
             <form method="post">
              {% csrf_token %}
              {{ stock_update_form.as_p }}
-              <button type="submit">保存</button>
+             <input type="submit" value="保存" class="button">
             </form>
         </div>
         {% endif %}
@@ -78,7 +78,7 @@
         <form method="post">
           {% csrf_token %}
           {{ order_form.as_p }}
-          <button type="submit">発注依頼</button>
+          <input type="submit" value="発注依頼" class="button">
       </form>
         </div>
 
@@ -112,7 +112,7 @@
                   <form method="post">
                       {% csrf_token %}
                       <input type="hidden" name="approve_order" value="{{ order.pk }}">
-                      <button type="submit">承認する</button>
+                      <input type="submit" value="承認する" class="button">
                   </form>
                   {% else %}
                   

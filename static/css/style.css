@@ -24,6 +24,14 @@ body {
   scrollbar-gutter: stable;
 }
 
+a:visited {
+  color:inherit;
+}
+
+a:hover{
+   text-decoration: underline;
+  }
+
 /* ナビゲーションバー */
 header {
   background-color: #2e3b4e;
@@ -90,6 +98,10 @@ header {
   flex-direction: column; /* 子要素を縦方向に並べる */
 }
 
+.content-main a{
+  color:#009999;
+}
+
 .title {
   font-weight: 100;
 }
@@ -101,10 +113,6 @@ table {
 
 tr {
   border-bottom: 1px solid gray;
-}
-
-.equip-add {
-  text-align: right;
 }
 
 .image {
@@ -149,3 +157,51 @@ tr {
   margin-bottom: 15px;
 }
 
+/* ボタンの設定 */
+.button {
+  width: 80px; /* ボタンの幅を調整 */
+  height: 32px;
+  border-radius: 5px;
+  background-color: #009999;
+  text-align: center;
+  border-width: 0px;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+.button:hover {
+  background-color: #006666; /*カーソルを乗せた時の色*/
+}
+
+.add-button {
+  width: 80px; /* ボタンの幅を調整 */
+  height: 32px;
+  border-radius: 5px;
+  background-color: #009999;
+  text-align: center;
+  /* border: solid 1px black; */
+  cursor: pointer;
+  display: inline-block;
+  line-height: 32px; /* ボタン内のテキストを縦中央揃え */
+  text-decoration: none; /* リンクの下線を削除 */
+  color: #FFFFFF; /* ボタンのテキストカラー */
+  margin:0 0 0 auto;
+}
+
+.add-button a {
+  font-size: 14px;
+  color:#FFFFFF;
+  
+}
+
+/* hoverスタイル */
+.add-button:hover {
+  background-color: #006666; /*カーソルを乗せた時の色*/
+  text-decoration: none;
+
+}
+
+.add-button a:hover {
+
+  text-decoration: none;
+
+}

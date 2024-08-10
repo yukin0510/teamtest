@@ -11,13 +11,14 @@
         <h2>備品一覧</h2>
       </div>
       <div class="content-main">
-        <div class="equip-add">
+        <div class="add-button">
         <a href="{% url 'equipment:add' %}">備品追加</a>
         </div>
 
-        <table width="50%" cellspacing="10" cellpadding="10">
+
+        <table width="80%" cellspacing="10" cellpadding="10">
           <tr align="center">
-          <th bgcolor="#d3d3d3">名前</th>
+          <th bgcolor="#d3d3d3">名前<small>※クリックで詳細</small></th>
           <th bgcolor="#d3d3d3">カテゴリー</th>
           <th bgcolor="#d3d3d3">設置場所</th>
           <th bgcolor="#d3d3d3">在庫数</th>
