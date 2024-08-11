@@ -12,16 +12,16 @@
       </div>
       <div class="content-main">
         <div class="add-button">
-        <a href="{% url 'equipment:add' %}">備品追加</a>
+        <a href="{% url 'equipment:add' %}">備品を追加</a>
         </div>
 
 
-        <table width="80%" cellspacing="10" cellpadding="10">
+        <table>
           <tr align="center">
-          <th bgcolor="#d3d3d3">名前<small>※クリックで詳細</small></th>
-          <th bgcolor="#d3d3d3">カテゴリー</th>
-          <th bgcolor="#d3d3d3">設置場所</th>
-          <th bgcolor="#d3d3d3">在庫数</th>
+          <th>名前<small>※クリックで詳細</small></th>
+          <th>カテゴリー</th>
+          <th>設置場所</th>
+          <th>在庫数</th>
           </tr>
           {% for equip in equipment %}
           <tr align="center">

@@ -106,26 +106,56 @@ header {
   font-weight: 100;
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-tr {
-  border-bottom: 1px solid gray;
-}
-
 .image {
-    max-width: auto; /* 例えば300pxに制限する */
-    height: 300px;
+  max-width: auto; /* 例えば300pxに制限する */
+  height: 300px;
 }
 
 .detail {
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 .small-text {
-  font-size: 0.6em;
+font-size: 0.6em;
+}
+
+
+/*テーブル部分の装飾*/
+
+table {
+  margin: 40px auto; /* テーブルを中央に配置し、上下に40pxのマージンを設定 */
+  width: 100%;
+  border-collapse: collapse; /* テーブルの枠線を重ねて表示 */
+}
+
+th,td {
+  border-bottom: 1px solid #ddd; /* 行の下にのみ枠線を設定 */ 
+  padding: 15px 20px; /* セル内の余白を設定（上下15px、左右20px） */
+}
+
+th{
+  background-color: #f5f5f5; /* テーブルの背景色を設定 */
+}
+
+
+th:first-child {
+  border-top-left-radius: 10px; /* 左上の角を10pxカーブさせる */
+}
+
+th:last-child {
+  border-top-right-radius: 10px; /* 右上の角を10pxカーブさせる */
+}
+
+/* 特定のページのテーブルスタイルを変更 */
+.detail table {
+  border: none; /* 例: ボーダーを削除 */
+  background-color: #FFFFFF;
+  width:60%;
+}
+
+.detail table th, .detail table td {
+  padding: 5px; /* 例: パディングを広くする */
+  background-color: #FFFFFF;
 }
 
 
@@ -157,6 +187,7 @@ tr {
   margin-bottom: 15px;
 }
 
+
 /* ボタンの設定 */
 .button {
   width: 80px; /* ボタンの幅を調整 */
@@ -168,13 +199,14 @@ tr {
   cursor: pointer;
   color: #FFFFFF;
   font-size: 16px;
+
 }
 .button:hover {
   background-color: #006666; /*カーソルを乗せた時の色*/
 }
 
 .add-button {
-  width: 80px; /* ボタンの幅を調整 */
+  width: 100px; /* ボタンの幅を調整 */
   height: 40px;
   border-radius: 5px;
   background-color: #009999;

@@ -41,6 +41,7 @@
 
         {% if user.is_admin %}<!-- 管理者の場合にだけ表示される！ -->
         <div class="detail">
+          
           <h2>在庫数の変更</h2>
             <!-- フォームの表示 -->
             <form method="post">
@@ -48,6 +49,7 @@
              {{ stock_update_form.as_p }}
              <input type="submit" value="保存" class="button">
             </form>
+            
         </div>
         {% endif %}
 
