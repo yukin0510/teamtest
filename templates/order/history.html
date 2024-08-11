@@ -22,7 +22,7 @@
           {% for order in orders %}
           <tr align="center">
           <td>{{ order.order_date }}</a> </td>
-          <td>{{ order.equip.equip_name }} </td>
+          <td><a href="{% url 'equipment:detail' order.equip.pk %}">{{ order.equip.equip_name }}</a> </td>
           <td>{{ order.quantity }} </td>
           <td>
             {% if order.approval_status == "承認待ち" %}

@@ -160,13 +160,14 @@ tr {
 /* ボタンの設定 */
 .button {
   width: 80px; /* ボタンの幅を調整 */
-  height: 32px;
+  height: 40px;
   border-radius: 5px;
   background-color: #009999;
   text-align: center;
   border-width: 0px;
   cursor: pointer;
   color: #FFFFFF;
+  font-size: 16px;
 }
 .button:hover {
   background-color: #006666; /*カーソルを乗せた時の色*/
@@ -174,21 +175,22 @@ tr {
 
 .add-button {
   width: 80px; /* ボタンの幅を調整 */
-  height: 32px;
+  height: 40px;
   border-radius: 5px;
   background-color: #009999;
   text-align: center;
   /* border: solid 1px black; */
   cursor: pointer;
   display: inline-block;
-  line-height: 32px; /* ボタン内のテキストを縦中央揃え */
+  line-height: 40px; /* ボタン内のテキストを縦中央揃え */
   text-decoration: none; /* リンクの下線を削除 */
   color: #FFFFFF; /* ボタンのテキストカラー */
   margin:0 0 0 auto;
+  font-size: 16px;
 }
 
 .add-button a {
-  font-size: 14px;
+  font-size: 16px;
   color:#FFFFFF;
   
 }

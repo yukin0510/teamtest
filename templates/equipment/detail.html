@@ -4,7 +4,13 @@
 {% block title %}{{ equip.equip_name }}の詳細{% endblock title %}
 
 {% block content %}
-
+{% comment %} 削除ボタン用追加機能 {% endcomment %}
+<script>
+  function confirmDelete() {
+    return confirm("本当に削除しますか？この操作は元に戻せません。");
+  }
+</script>
+{% comment %} 削除ボタン用追加機能ここまで {% endcomment %}
 
     <div class="content">
       <div class="content-title">
@@ -18,7 +24,7 @@
             {% csrf_token %}
             <input type="submit" class="button" value="編集" class=>
             </form>
-          <form action="{% url 'equipment:delete' equip.id %}" method="post">
+          <form action="{% url 'equipment:delete' equip.id %}" method="post" onsubmit="return confirmDelete();">
             {% csrf_token %}
             <input type="submit" class="button" value="削除">
         </form>
