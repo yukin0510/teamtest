@@ -39,7 +39,7 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
         context['stock_update_form'] = StockUpdateForm(instance=equip) #在庫数更新のフォームが使えるようになる
         context['stock_changes'] = StockChange.objects.filter(equip=equip).order_by('-changed_date')[:5]
         context['order_form'] = OrderForm() #発注数更新
-        context['orders'] = Order.objects.filter(equip=equip)
+        context['orders'] = Order.objects.filter(equip=equip).order_by('-order_date')[:5]
         return context
 
     def post(self, request, *args, **kwargs):
