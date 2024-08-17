@@ -12,6 +12,46 @@
       </div>
       <div class="content-main">
 
+
+        <form method="get" action="">
+          <label for="status_filter"><b>フィルター：条件を選択してください▶</b></label>
+          <select name="status_filter" id="status_filter" onchange="this.form.submit()">
+            <option value="">全て</option>
+            <option value="承認待ち" {% if request.GET.status_filter == "承認待ち" %}selected{% endif %}>承認待ち</option>
+            <option value="承認済み" {% if request.GET.status_filter == "承認済み" %}selected{% endif %}>承認済み</option>
+            <!-- 必要に応じて他のステータスも追加 -->
+          </select>
+        </form>
+
+
+    <!-- 件数表示 -->
+    <div class="item-count">
+      全{{ page_obj.paginator.count }}件中
+      {{ page_obj.start_index }}件目から{{ page_obj.end_index }}件目を表示中
+    </div>
+
+    <!-- ページネーションリンク -->
+    <div class="pagination">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?{% if request.GET.status_filter %}status_filter={{ request.GET.status_filter }}&{% endif %}page=1">&laquo; 最初</a>
+        <a href="?{% if request.GET.status_filter %}status_filter={{ request.GET.status_filter }}&{% endif %}page={{ page_obj.previous_page_number }}">前のページ</a>
+      {% else %}
+        <span class="disabled">&laquo; 最初</span>
+        <span class="disabled">前のページ</span>
+      {% endif %}
+  
+      {% if page_obj.has_next %}
+        <a href="?{% if request.GET.status_filter %}status_filter={{ request.GET.status_filter }}&{% endif %}page={{ page_obj.next_page_number }}">次のページ</a>
+        <a href="?{% if request.GET.status_filter %}status_filter={{ request.GET.status_filter }}&{% endif %}page={{ page_obj.paginator.num_pages }}">最後 &raquo;</a>
+      {% else %}
+        <span class="disabled">次のページ</span>
+        <span class="disabled">最後 &raquo;</span>
+      {% endif %}
+      </span>
+    </div>
+
+
         <table cellspacing="10" cellpadding="10">
           <tr align="center">
           <th>発注日</th>
@@ -46,7 +86,7 @@
           </tr>
           {% empty %}
           <tr>
-            <td colspan="4">発注履歴はありません</td>
+            <td colspan="5">発注履歴はありません</td>
           </tr>
           {% endfor %}
         </table>

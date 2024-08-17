@@ -239,3 +239,19 @@ th:last-child {
   text-decoration: none;
 
 }
+
+
+/* ページ送り部分のデザイン*/
+.item-count{
+  margin-top: 10px;
+}
+
+.pagination{
+  margin-bottom: -20px;
+}
+
+.pagination .disabled {
+  color: gray;
+  cursor: not-allowed;
+  text-decoration: none;
+}
