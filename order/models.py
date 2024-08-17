@@ -8,15 +8,17 @@ class Order(models.Model):
     db_table = 'order'
 
   equip = models.ForeignKey(Equipment, on_delete=models.CASCADE)
-  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='orders')
   quantity = models.PositiveIntegerField()
   order_date = models.DateTimeField(auto_now_add=True)
   approval_status = models.CharField(max_length=50, default='承認待ち')
   approval_date = models.DateTimeField(null=True, blank=True)
+  approval_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='approved_orders', null=True, blank=True)
 
-  def approve(self):
+  def approve(self,approver):
       self.approval_status = '承認済み'
       self.approval_date = timezone.now()
+      self.approval_user = approver
       self.save()
 
   

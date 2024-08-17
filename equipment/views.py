@@ -75,7 +75,7 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
         order_id = request.POST.get('approve_order')
         if order_id:
             order = get_object_or_404(Order, pk=order_id)
-            order.approve()
+            order.approve(request.user)
 
 
         return self.render_to_response(self.get_context_data(
