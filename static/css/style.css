@@ -146,6 +146,10 @@ th:last-child {
   border-top-right-radius: 10px; /* 右上の角を10pxカーブさせる */
 }
 
+table tr:hover {
+  background-color: #f6f6f6; /* ハイライトの色を指定 */
+}
+
 /* 特定のページのテーブルスタイルを変更 */
 .detail table {
   border: none; /* 例: ボーダーを削除 */
