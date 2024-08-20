@@ -5,6 +5,7 @@ from .forms import CustomUserCreationForm,CustomUserChangeForm
 from django.views.generic import ListView,TemplateView,UpdateView
 from .models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
 
 
 class IndexView(TemplateView):
@@ -33,3 +34,9 @@ class CustomUserListView(LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         return CustomUser.objects.order_by('-registration_date')
+    
+    def dispatch(self, request, *args, **kwargs):#管理者以外にユーザー一覧へのアクセスを許可しない
+        # ログインユーザーのis_adminがTrueかどうかをチェック
+        if not request.user.is_admin:
+            return HttpResponseForbidden("このページにアクセスする権限がありません。")
+        return super().dispatch(request, *args, **kwargs)
