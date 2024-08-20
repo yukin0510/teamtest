@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 from django.views import generic
 from .forms import CustomUserCreationForm,CustomUserChangeForm
 from django.views.generic import ListView,TemplateView,UpdateView
@@ -15,8 +16,10 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'users/edit.html'
     success_url = reverse_lazy('users:users')
 
-    def get_object(self):
-        return self.request.user
+    def get_object(self, queryset=None):
+        # URL から渡された pk を使って、特定のユーザーを取得
+        user_id = self.kwargs.get("pk")
+        return get_object_or_404(CustomUser, pk=user_id)
 
 class SignUpView(generic.CreateView):
     form_class = CustomUserCreationForm
