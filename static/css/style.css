@@ -1,6 +1,7 @@
 /* リセットスタイル */
 body,
 h1,
+h2,
 ul,
 li,
 a {
@@ -112,7 +113,7 @@ header {
 }
 
 .detail {
-margin-bottom: 20px;
+margin-bottom: 30px;
 }
 
 .small-text {
@@ -123,7 +124,7 @@ font-size: 0.6em;
 /*テーブル部分の装飾*/
 
 table {
-  margin: 40px auto; /* テーブルを中央に配置し、上下に40pxのマージンを設定 */
+  margin: 20px auto; /* テーブルを中央に配置し、上下に40pxのマージンを設定 */
   width: 100%;
   border-collapse: collapse; /* テーブルの枠線を重ねて表示 */
 }
@@ -250,9 +251,6 @@ table tr:hover {
   margin-top: 10px;
 }
 
-.pagination{
-  margin-bottom: -20px;
-}
 
 .pagination .disabled {
   color: gray;
