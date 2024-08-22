@@ -4,13 +4,28 @@
 {% block title %}{{ equip.equip_name }}の詳細{% endblock title %}
 
 {% block content %}
-{% comment %} 削除ボタン用追加機能 {% endcomment %}
+{% comment %} JavaScript {% endcomment %}
 <script>
   function confirmDelete() {
     return confirm("本当に削除しますか？この操作は元に戻せません。");
   }
 </script>
-{% comment %} 削除ボタン用追加機能ここまで {% endcomment %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const imgElement = document.querySelector("img.image");
+    if (imgElement) {
+      imgElement.onerror = function() {
+        // 画像が破損している場合、画像を非表示にし、no-imageクラスを表示
+        imgElement.style.display = "none";
+        const noImageDiv = document.createElement("div");
+        noImageDiv.className = "no-image";
+        noImageDiv.textContent = "NO IMAGE";
+        imgElement.parentNode.appendChild(noImageDiv);
+      }
+    }
+  });
+</script>
+{% comment %} JavaScriptここまで {% endcomment %}
 
     <div class="content">
       <div class="content-title">
@@ -18,26 +33,40 @@
       </div>
       <div class="content-main">
 
-        <div class="detail">
-        <div class="edit-delete">
-            <form action="{% url 'equipment:edit' equip.id %}" method="get">
-            {% csrf_token %}
-            <input type="submit" class="button" value="編集" class=>
-            </form>
-          <form action="{% url 'equipment:delete' equip.id %}" method="post" onsubmit="return confirmDelete();">
-            {% csrf_token %}
-            <input type="submit" class="button" value="削除">
-        </form>
-      </div>
+        {% if user.is_admin %}<!-- 管理者の場合にだけ表示される！ -->
+          <div class="detail">
+            <div class="edit-delete">
+              <form action="{% url 'equipment:edit' equip.id %}" method="get">
+              {% csrf_token %}
+              <input type="submit" class="button" value="編集" class=>
+              </form>
+              <form action="{% url 'equipment:delete' equip.id %}" method="post" onsubmit="return confirmDelete();">
+              {% csrf_token %}
+              <input type="submit" class="button" value="削除">
+              </form>
+          </div>
+        {% endif %}
 
-          <p> <img src="{{ image_url }}" alt="{{ equip.equip_name }}" class="image"></p>
-          <p> {{ equip.text }}</p>
-          <p>カテゴリ: {{ equip.category }}</p>
-          <p>状態: {{ equip.condition }}</p>
-          <p>設置場所: {{ equip.place }}</p>
-          <p>在庫数: {{ equip.stock }}</p>
-
-        </div>
+          <div class="detail-content">
+            <div class="detail-left">
+              {% if equip.image %}<!--もし画像があるときは-->
+                <div class="image-box">
+                  <img src="{{ equip.image.url }}" alt="NO IMAGE" class="image">
+                </div>
+              {% else %}<!--もし画像がないときは-->
+                <div class="no-image">
+                  <p>NO IMAGE</p>
+                </div>
+              {% endif %}
+            </div>
+            <div class="detail-right">
+              <p class="with-border"> {{ equip.text }}</p>
+              <p>カテゴリ: {{ equip.category }}</p>
+              <p>状態: {{ equip.condition }}</p>
+              <p>設置場所: {{ equip.place }}</p>
+              <p>在庫数: {{ equip.stock }}</p>
+            </div>
+          </div>
 
         {% if user.is_admin %}<!-- 管理者の場合にだけ表示される！ -->
         <div class="detail">
@@ -87,7 +116,7 @@
           {% csrf_token %}
           {{ order_form.as_p }}
           <input type="submit" value="発注依頼" class="button">
-      </form>
+        </form>
         </div>
 
         {% if user.is_admin %}

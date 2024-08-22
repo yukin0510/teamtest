@@ -107,9 +107,64 @@ header {
   font-weight: 100;
 }
 
+.detail-content {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 30px;
+  padding:20px;
+}
+
+.detail-right {
+  width: 40%;
+  padding: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 子要素を等間隔に配置 */
+  background-color: #f0f6f6;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.detail-left {
+  width: 40%;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: right; /* 横方向に中央揃え */
+  align-items: center; /* 縦方向に中央揃え */
+  background-color: #f0f6f6;
+  border-radius: 20px 0px 0px 20px;
+}
+
+.with-border {
+  border-bottom: 1px solid #ccc; /* 下にボーダーを追加 */
+  padding-bottom: 15px; /* ボーダーとの間隔を調整 */
+  margin-bottom: 15px; /* ボーダーとの間隔を調整 */
+}
+
 .image {
   max-width: 300px; /* 例えば300pxに制限する */
   max-height: 300px; /* 例えば300pxに制限する */
+  border: 1px solid #ccc;
+}
+
+.image-box {
+  width: 300px; 
+  height: 300px; 
+  position: relative; /* 必要に応じて追加 */
+}
+
+.no-image {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  font-size: 20px;
+  color: #666;
+  background-color: #f8f8f8;
 }
 
 .detail {
