@@ -14,11 +14,11 @@ class Order(models.Model):
   approval_status = models.CharField(max_length=50, default='承認待ち')
   approval_date = models.DateTimeField(null=True, blank=True)
   approval_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='approved_orders', null=True, blank=True)
+  comment = models.TextField(null=True, blank=True)
 
-  def approve(self,approver):
+  def approve(self, user, comment=None):
       self.approval_status = '承認済み'
       self.approval_date = timezone.now()
-      self.approval_user = approver
+      self.approval_user = user  # 承認したユーザーを記録
+      self.comment = comment  # コメントを保存
       self.save()
-
-  

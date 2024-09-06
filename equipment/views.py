@@ -44,22 +44,18 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        previous_stock = self.object.stock# フォームを保存する前に、更新前の在庫数を取得しておく
+        previous_stock = self.object.stock
 
-    # 在庫数更新フォームの処理
+        # 在庫数更新フォームの処理
         stock_update_form = StockUpdateForm(request.POST, instance=self.object)
         if stock_update_form.is_valid():
-        # フォームを保存する
             updated_equip = stock_update_form.save()
-
-        # StockChangeテーブルに変更履歴を保存
             StockChange.objects.create(
-            equip=self.object,
-            user=request.user,
-            previous_stock=previous_stock,
-            new_stock=updated_equip.stock,
-        )
-
+                equip=self.object,
+                user=request.user,
+                previous_stock=previous_stock,
+                new_stock=updated_equip.stock,
+            )
             return redirect(self.get_success_url())
 
         # 発注フォームの処理
@@ -73,16 +69,17 @@ class EquipDetailView(LoginRequiredMixin, DetailView):
 
         # 発注承認処理
         order_id = request.POST.get('approve_order')
+        approval_comment = request.POST.get('approval_comment')  # コメントを取得
         if order_id:
             order = get_object_or_404(Order, pk=order_id)
-            order.approve(request.user)
-
+            order.approve(request.user, comment=approval_comment)  # コメントを渡す
+            return redirect(self.get_success_url())
 
         return self.render_to_response(self.get_context_data(
             stock_update_form=stock_update_form,
             order_form=order_form
         ))
-
+    
     def get_success_url(self):
         return reverse_lazy('equipment:detail', kwargs={'pk': self.object.pk})
     

@@ -24,6 +24,30 @@
       }
     }
   });
+  document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("approvalModal");
+    const span = document.getElementsByClassName("close")[0];
+    const orderPkInput = document.getElementById("orderPkInput");
+  
+    document.querySelectorAll(".approve-button").forEach(function(button) {
+      button.addEventListener("click", function(event) {
+        event.preventDefault();
+        const orderPk = button.dataset.orderPk;
+        orderPkInput.value = orderPk;
+        modal.style.display = "block";
+      });
+    });
+  
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+  
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  });
 </script>
 {% comment %} JavaScriptここまで {% endcomment %}
 
@@ -128,6 +152,7 @@
               <th>発注者</th>
               <th>発注数</th>
               <th>承認ステータス</th>
+              <th>承認コメント</th>
               <th></th>
           </tr>
           {% for order in orders %}
@@ -144,13 +169,10 @@
                 {{ order.approval_status }}
                 {% endif %}
               </td>
+              <td>{{ order.comment }}</td>
               <td>
                   {% if order.approval_status != '承認済み' %}
-                  <form method="post">
-                      {% csrf_token %}
-                      <input type="hidden" name="approve_order" value="{{ order.pk }}">
-                      <input type="submit" value="承認する" class="button">
-                  </form>
+                  <button type="button" class="button approve-button" data-order-pk="{{ order.pk }}">承認する</button>
                   {% else %}
                   
                   {% endif %}
@@ -169,6 +191,25 @@
 
         </div>
       </div>
+
+<!-- モーダルウィンドウ -->
+<div id="approvalModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  <center>
+    <h2>承認コメント</h2>
+    <p><small>※コメントしない場合は、無記入で承認するボタンを押してください</small></p>
+    <form id="approvalForm" method="post">
+      {% csrf_token %}
+      <textarea name="approval_comment" rows="7" placeholder="承認に関するコメントを入力してください" style="width:60%;"></textarea>
+      <br>
+      <br>
+      <input type="hidden" id="orderPkInput" name="approve_order">
+      <input type="submit" value="承認する" class="button">
+    </form>
+  </center>
+  </div>
+</div>
 
       
 {% endblock content %}

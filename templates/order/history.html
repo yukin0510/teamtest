@@ -58,6 +58,7 @@
           <th>備品名</th>
           <th>数量</th>
           <th>ステータス</th>
+          <th>承認コメント</th>
           <th>承認者</th>
           </tr>
           {% for order in orders %}
@@ -72,6 +73,15 @@
             <span style="color: green;"><b>{{ order.approval_status }}</b></span>
             {% else %}
             {{ order.approval_status }}
+            {% endif %}
+          </td>
+          <td>
+            {% if order.approval_status == "承認待ち" %}
+            <span>－</span>
+            {% elif order.approval_status == "承認済み" %}
+            <span>{{ order.comment }}</span>
+            {% else %}
+            <span>－</span>
             {% endif %}
           </td>
           <td>
